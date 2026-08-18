@@ -1,0 +1,1776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FinAssist AI</title>
+
+<style>
+
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Inter, Arial, sans-serif;
+    background: #f6f7fb;
+    color: #151923;
+    transition: background .2s, color .2s;
+}
+
+button,
+textarea {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   APP
+========================================================= */
+
+.app {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+.sidebar {
+    width: 270px;
+    background: #ffffff;
+    border-right: 1px solid #e6e8ee;
+    padding: 22px 16px;
+    display: flex;
+    flex-direction: column;
+    transition: background .2s, border-color .2s;
+}
+
+.brand {
+    display: flex;
+    gap: 11px;
+    align-items: center;
+    padding: 0 8px 24px;
+}
+
+.mark {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #5b4cff, #8d80ff);
+    color: #fff;
+    display: grid;
+    place-items: center;
+    font-weight: 800;
+}
+
+.brand b {
+    display: block;
+}
+
+.brand small {
+    color: #7d8491;
+    font-size: 10px;
+}
+
+.new {
+    border: 0;
+    background: #151923;
+    color: #fff;
+    border-radius: 11px;
+    padding: 12px;
+    text-align: left;
+    font-weight: 600;
+}
+
+.label {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .1em;
+    color: #9ca2ad;
+    margin: 26px 8px 8px;
+}
+
+.side {
+    border: 0;
+    background: transparent;
+    width: 100%;
+    padding: 10px 9px;
+    border-radius: 9px;
+    text-align: left;
+    color: #535b69;
+    font-size: 12px;
+}
+
+.side:hover,
+.side.active {
+    background: #f0f1f5;
+    color: #151923;
+}
+
+.bottom {
+    margin-top: auto;
+}
+
+.demo {
+    font-size: 10px;
+    color: #8d95a2;
+    padding: 10px 8px;
+}
+
+.dot {
+    color: #18b878;
+}
+
+.user {
+    border-top: 1px solid #e6e8ee;
+    padding: 14px 7px;
+    display: flex;
+    gap: 9px;
+    align-items: center;
+}
+
+.avatar {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: #eceaff;
+    color: #5b4cff;
+    display: grid;
+    place-items: center;
+    font-size: 11px;
+    font-weight: 800;
+}
+
+.user small {
+    display: block;
+    color: #8b92a0;
+    font-size: 9px;
+    margin-top: 2px;
+}
+
+.more {
+    margin-left: auto;
+    color: #999;
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.main {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+
+/* =========================================================
+   TOP BAR
+========================================================= */
+
+.top {
+    height: 70px;
+    background: #ffffff;
+    border-bottom: 1px solid #e6e8ee;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 28px;
+    transition: background .2s, border-color .2s;
+}
+
+.title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.bot {
+    width: 36px;
+    height: 36px;
+    border-radius: 11px;
+    background: #eeecff;
+    display: grid;
+    place-items: center;
+}
+
+.bot i {
+    width: 10px;
+    height: 10px;
+    background: #5b4cff;
+    border-radius: 50%;
+    box-shadow: 0 0 0 5px #dcd8ff;
+}
+
+.title b {
+    font-size: 13px;
+}
+
+.title small {
+    display: block;
+    color: #7d8491;
+    font-size: 10px;
+    margin-top: 2px;
+}
+
+.online {
+    color: #19b878;
+}
+
+.actions {
+    display: flex;
+    gap: 7px;
+}
+
+.icon {
+    width: 35px;
+    height: 35px;
+    border: 1px solid #e1e4ea;
+    background: #ffffff;
+    border-radius: 9px;
+    color: #6f7785;
+}
+
+
+/* =========================================================
+   CHAT
+========================================================= */
+
+.chat {
+    flex: 1;
+    overflow: auto;
+    padding: 30px 18px 145px;
+}
+
+.welcome {
+    max-width: 860px;
+    margin: 30px auto;
+    text-align: center;
+}
+
+.hero {
+    width: 58px;
+    height: 58px;
+    border-radius: 18px;
+    margin: auto;
+    background: #eeecff;
+    color: #5b4cff;
+    display: grid;
+    place-items: center;
+    font-size: 27px;
+}
+
+.welcome h1 {
+    font-size: 38px;
+    letter-spacing: -1.5px;
+    margin: 18px 0 9px;
+}
+
+.welcome p {
+    font-size: 13px;
+    color: #777f8d;
+    margin: 0 auto 28px;
+}
+
+
+/* =========================================================
+   SUGGESTION CARDS
+========================================================= */
+
+.cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    text-align: left;
+}
+
+.card {
+    border: 1px solid #e3e6ec;
+    background: #ffffff;
+    color: #151923;
+    border-radius: 15px;
+    padding: 15px;
+    display: grid;
+    grid-template-columns: 36px 1fr;
+    gap: 10px;
+    transition: background .2s, border-color .2s;
+}
+
+.card:hover {
+    border-color: #c7c2ff;
+}
+
+.card span {
+    width: 36px;
+    height: 36px;
+    background: #f0efff;
+    color: #5b4cff;
+    border-radius: 10px;
+    display: grid;
+    place-items: center;
+    font-weight: 800;
+}
+
+.card b {
+    font-size: 12px;
+}
+
+.card small {
+    display: block;
+    color: #818896;
+    font-size: 10px;
+    margin-top: 4px;
+}
+
+
+/* =========================================================
+   CHAT ROWS
+========================================================= */
+
+.row {
+    max-width: 860px;
+    margin: 0 auto 20px;
+    display: flex;
+    gap: 9px;
+}
+
+.row.user {
+    justify-content: flex-end;
+}
+
+.bubble {
+    max-width: 75%;
+    padding: 12px 15px;
+    border-radius: 16px;
+    font-size: 13px;
+    line-height: 1.55;
+}
+
+.row.assistant .bubble {
+    background: #ffffff;
+    color: #151923;
+    border: 1px solid #e3e6ec;
+    border-top-left-radius: 5px;
+}
+
+.row.user .bubble {
+    background: #5b4cff;
+    color: #ffffff;
+    border-bottom-right-radius: 5px;
+}
+
+.mini {
+    font-size: 9px;
+    color: #9aa1ad;
+    margin-top: 5px;
+}
+
+.row.user .mini {
+    text-align: right;
+}
+
+
+/* =========================================================
+   TABLE / TRANSACTIONS
+========================================================= */
+
+.table {
+    margin-top: 10px;
+    border: 1px solid #e2e5eb;
+    border-radius: 12px;
+    overflow: auto;
+    background: #ffffff;
+}
+
+.table table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 520px;
+}
+
+.table th,
+.table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #e7e9ee;
+    text-align: left;
+    font-size: 10px;
+}
+
+.table th {
+    background: #f3f4f7;
+    color: #777f8d;
+    font-size: 8px;
+}
+
+.table tr:last-child td {
+    border: 0;
+}
+
+.table tr:hover td {
+    background: #f8f9fb;
+}
+
+.amt {
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   COMPOSER
+========================================================= */
+
+.composerWrap {
+    position: absolute;
+    bottom: 0;
+    left: 270px;
+    right: 0;
+    padding: 14px 20px 17px;
+    background: linear-gradient(
+        transparent,
+        #f6f7fb 25%
+    );
+}
+
+.composer {
+    max-width: 860px;
+    margin: auto;
+    background: #ffffff;
+    border: 1px solid #dfe2e8;
+    border-radius: 17px;
+    padding: 8px 8px 8px 15px;
+    display: flex;
+    align-items: flex-end;
+    box-shadow: 0 15px 45px #18213a12;
+}
+
+.composer textarea {
+    flex: 1;
+    border: 0;
+    outline: 0;
+    resize: none;
+    padding: 8px 4px;
+    max-height: 120px;
+    font-size: 13px;
+    background: transparent;
+    color: #151923;
+}
+
+.composer textarea::placeholder {
+    color: #9ba2ae;
+}
+
+.send {
+    width: 40px;
+    height: 40px;
+    border: 0;
+    border-radius: 12px;
+    background: #5b4cff;
+    color: #fff;
+    font-size: 20px;
+}
+
+.hint {
+    text-align: center;
+    color: #9ba2ae;
+    font-size: 9px;
+    margin-top: 7px;
+}
+
+
+/* =========================================================
+   TYPING
+========================================================= */
+
+.typing {
+    display: flex;
+    gap: 4px;
+}
+
+.typing i {
+    width: 5px;
+    height: 5px;
+    background: #9299a7;
+    border-radius: 50%;
+    animation: typingAnimation 1s infinite;
+}
+
+.typing i:nth-child(2) {
+    animation-delay: .15s;
+}
+
+.typing i:nth-child(3) {
+    animation-delay: .3s;
+}
+
+@keyframes typingAnimation {
+    50% {
+        transform: translateY(-4px);
+        opacity: .5;
+    }
+}
+
+
+/* =========================================================
+   DARK MODE
+========================================================= */
+
+body.dark {
+    background: #0d0f14;
+    color: #f5f6f8;
+}
+
+
+/* Sidebar */
+
+body.dark .sidebar {
+    background: #151821;
+    border-color: #292e3a;
+}
+
+body.dark .brand b {
+    color: #f5f6f8;
+}
+
+body.dark .brand small,
+body.dark .label,
+body.dark .demo {
+    color: #8b92a0;
+}
+
+body.dark .new {
+    background: #5b4cff;
+    color: #ffffff;
+}
+
+body.dark .side {
+    color: #b8bec9;
+}
+
+body.dark .side:hover,
+body.dark .side.active {
+    background: #1e222c;
+    color: #ffffff;
+}
+
+body.dark .user {
+    border-color: #292e3a;
+}
+
+body.dark .user b {
+    color: #f5f6f8;
+}
+
+body.dark .user small {
+    color: #8b92a0;
+}
+
+body.dark .more {
+    color: #777f8d;
+}
+
+
+/* Top bar */
+
+body.dark .top {
+    background: #151821;
+    border-color: #292e3a;
+}
+
+body.dark .title b {
+    color: #f5f6f8;
+}
+
+body.dark .title small {
+    color: #9aa1ad;
+}
+
+body.dark .icon {
+    background: #151821;
+    border-color: #292e3a;
+    color: #d7dbe2;
+}
+
+body.dark .icon:hover {
+    background: #1e222c;
+}
+
+
+/* Main */
+
+body.dark .chat {
+    background: #0d0f14;
+}
+
+body.dark .welcome h1 {
+    color: #f5f6f8;
+}
+
+body.dark .welcome p {
+    color: #9aa1ad;
+}
+
+
+/* Cards */
+
+body.dark .card {
+    background: #151821;
+    border-color: #292e3a;
+    color: #f5f6f8;
+}
+
+body.dark .card:hover {
+    background: #1b1f28;
+    border-color: #5b4cff;
+}
+
+body.dark .card b {
+    color: #f5f6f8;
+}
+
+body.dark .card small {
+    color: #9aa1ad;
+}
+
+body.dark .card span {
+    background: #222033;
+    color: #8d80ff;
+}
+
+
+/* Assistant messages */
+
+body.dark .row.assistant .bubble {
+    background: #151821;
+    color: #f5f6f8;
+    border-color: #292e3a;
+}
+
+
+/* User messages */
+
+body.dark .row.user .bubble {
+    background: #5b4cff;
+    color: #ffffff;
+}
+
+
+/* Time */
+
+body.dark .mini {
+    color: #858d9c;
+}
+
+
+/* Transaction tables */
+
+body.dark .table {
+    background: #151821;
+    border-color: #292e3a;
+}
+
+body.dark .table table {
+    background: #151821;
+}
+
+body.dark .table th {
+    background: #1d212b;
+    color: #aeb5c1;
+    border-color: #292e3a;
+}
+
+body.dark .table td {
+    background: #151821;
+    color: #e8ebf0;
+    border-color: #292e3a;
+}
+
+body.dark .table tr:hover td {
+    background: #1c2029;
+}
+
+
+/* Composer */
+
+body.dark .composerWrap {
+    background: linear-gradient(
+        transparent,
+        #0d0f14 25%
+    );
+}
+
+body.dark .composer {
+    background: #151821;
+    border-color: #292e3a;
+}
+
+body.dark .composer textarea {
+    background: transparent;
+    color: #f5f6f8;
+}
+
+body.dark .composer textarea::placeholder {
+    color: #747c8a;
+}
+
+body.dark .hint {
+    color: #7f8795;
+}
+
+
+/* Typing */
+
+body.dark .typing i {
+    background: #9aa1ad;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+.force-mobile .sidebar {
+    position: fixed !important;
+    left: -285px;
+    top: 0;
+    bottom: 0;
+    z-index: 5;
+}
+
+.force-mobile .composerWrap {
+    left: 0 !important;
+}
+
+.force-mobile .menu {
+    display: block !important;
+}
+
+.force-mobile .cards {
+    grid-template-columns: 1fr;
+}
+
+.force-mobile .welcome h1 {
+    font-size: 29px;
+}
+
+.force-mobile .top {
+    padding: 0 14px;
+}
+
+.force-mobile .bubble {
+    max-width: 88%;
+}
+
+
+/* =========================================================
+   DESKTOP
+========================================================= */
+
+.force-desktop .sidebar {
+    position: static !important;
+    left: auto !important;
+    width: 270px !important;
+}
+
+.force-desktop .composerWrap {
+    left: 270px !important;
+}
+
+.force-desktop .menu {
+    display: none !important;
+}
+
+.force-desktop .cards {
+    grid-template-columns: 1fr 1fr;
+}
+
+.force-desktop .welcome h1 {
+    font-size: 38px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:800px) {
+
+    .sidebar {
+        position: fixed;
+        left: -285px;
+        top: 0;
+        bottom: 0;
+        z-index: 5;
+        transition: .2s;
+    }
+
+    .sidebar.open {
+        left: 0;
+    }
+
+    .composerWrap {
+        left: 0;
+    }
+
+    .menu {
+        display: block !important;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    .welcome h1 {
+        font-size: 29px;
+    }
+
+    .top {
+        padding: 0 14px;
+    }
+
+    .bubble {
+        max-width: 88%;
+    }
+}
+
+.menu {
+    display: none;
+}
+
+</style>
+</head>
+
+
+<body>
+
+<div class="app">
+
+
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
+
+<aside class="sidebar" id="sidebar">
+
+    <div class="brand">
+
+        <div class="mark">
+            F
+        </div>
+
+        <div>
+            <b>FinAssist</b>
+            <small>AI Finance Assistant</small>
+        </div>
+
+    </div>
+
+
+    <button class="new" onclick="resetChat()">
+        ＋ New conversation
+    </button>
+
+
+    <div class="label">
+        QUICK ACCESS
+    </div>
+
+
+    <button class="side"
+        onclick="send('Show my recent transactions')">
+        ↗ Recent transactions
+    </button>
+
+
+    <button class="side"
+        onclick="send('How much did I spend this month?')">
+        ₹ Monthly spending
+    </button>
+
+
+    <button class="side"
+        onclick="send('Show my spending by category')">
+        ▥ Spending analysis
+    </button>
+
+
+    <button class="side"
+        onclick="send('What is my account balance?')">
+        ◉ Account balance
+    </button>
+
+
+    <div class="label">
+        RECENT CHATS
+    </div>
+
+
+    <button class="side active">
+        August spending review
+    </button>
+
+    <button class="side">
+        Transaction lookup
+    </button>
+
+    <button class="side">
+        Budget planning
+    </button>
+
+
+    <div class="bottom">
+
+        <div class="demo">
+            <span class="dot">●</span>
+            Demo environment
+        </div>
+
+
+        <div class="user">
+
+            <div class="avatar">
+                DA
+            </div>
+
+            <div>
+                <b style="font-size:11px">
+                    Demo User
+                </b>
+
+                <small>
+                    Personal account
+                </small>
+            </div>
+
+            <span class="more">
+                •••
+            </span>
+
+        </div>
+
+    </div>
+
+</aside>
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main class="main">
+
+
+<header class="top">
+
+    <div style="display:flex;gap:9px;align-items:center">
+
+        <button
+            class="icon menu"
+            onclick="document.getElementById('sidebar').classList.toggle('open')">
+            ☰
+        </button>
+
+
+        <div class="bot">
+            <i></i>
+        </div>
+
+
+        <div class="title">
+
+            <b>
+                FinAssist AI
+            </b>
+
+            <small>
+                <span class="online">●</span>
+                Online • Ready to help
+            </small>
+
+        </div>
+
+    </div>
+
+
+    <div class="actions">
+
+        <button
+            class="icon"
+            id="viewBtn"
+            title="Change interface view"
+            onclick="cycleView()">
+            ▣
+        </button>
+
+
+        <button
+            class="icon"
+            id="themeBtn"
+            title="Toggle dark mode"
+            onclick="toggleDarkMode()">
+            ☼
+        </button>
+
+
+        <button
+            class="icon"
+            title="Clear conversation"
+            onclick="resetChat()">
+            ⌫
+        </button>
+
+    </div>
+
+</header>
+
+
+<!-- =====================================================
+     CHAT AREA
+===================================================== -->
+
+<section class="chat" id="chat">
+
+
+<div class="welcome" id="welcome">
+
+    <div class="hero">
+        ✦
+    </div>
+
+
+    <h1>
+        How can I help you today?
+    </h1>
+
+
+    <p>
+        Ask me about transactions, spending,
+        balances, budgets, or account activity.
+    </p>
+
+
+    <div class="cards">
+
+
+        <button
+            class="card"
+            onclick="send('Show my recent transactions')">
+
+            <span>
+                ↗
+            </span>
+
+            <div>
+
+                <b>
+                    Recent transactions
+                </b>
+
+                <small>
+                    View your latest activity
+                </small>
+
+            </div>
+
+        </button>
+
+
+        <button
+            class="card"
+            onclick="send('How much did I spend this month?')">
+
+            <span>
+                ₹
+            </span>
+
+            <div>
+
+                <b>
+                    Monthly spending
+                </b>
+
+                <small>
+                    See your spending total
+                </small>
+
+            </div>
+
+        </button>
+
+
+        <button
+            class="card"
+            onclick="send('Show my spending by category')">
+
+            <span>
+                ▥
+            </span>
+
+            <div>
+
+                <b>
+                    Spending breakdown
+                </b>
+
+                <small>
+                    Analyze your categories
+                </small>
+
+            </div>
+
+        </button>
+
+
+        <button
+            class="card"
+            onclick="send('What is my account balance?')">
+
+            <span>
+                ◉
+            </span>
+
+            <div>
+
+                <b>
+                    Account balance
+                </b>
+
+                <small>
+                    Check available balance
+                </small>
+
+            </div>
+
+        </button>
+
+
+    </div>
+
+</div>
+
+
+</section>
+
+
+<!-- =====================================================
+     COMPOSER
+===================================================== -->
+
+<div class="composerWrap">
+
+    <div class="composer">
+
+        <textarea
+            id="input"
+            rows="1"
+            placeholder="Ask anything about your finances..."></textarea>
+
+
+        <button
+            class="send"
+            onclick="send()">
+            ↑
+        </button>
+
+    </div>
+
+
+    <div class="hint">
+        Press <b>Enter</b> to send •
+        <b>Shift + Enter</b> for a new line
+    </div>
+
+</div>
+
+
+</main>
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   API
+========================================================= */
+
+const API_BASE = "http://127.0.0.1:8000";
+
+
+/* =========================================================
+   DOM
+========================================================= */
+
+const input =
+    document.getElementById("input");
+
+const chat =
+    document.getElementById("chat");
+
+const welcome =
+    document.getElementById("welcome");
+
+
+/* =========================================================
+   BACKEND REQUEST
+========================================================= */
+
+async function askBackend(message) {
+
+    try {
+
+        const response = await fetch(
+            API_BASE + "/api/chat",
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+                    message: message
+                })
+            }
+        );
+
+
+        if (!response.ok) {
+            throw new Error(
+                "API " + response.status
+            );
+        }
+
+
+        return await response.json();
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        return {
+            answer:
+                "Backend is not running. Start it from the backend folder with `uvicorn app.main:app --reload`.",
+            data: null
+        };
+
+    }
+
+}
+
+
+/* =========================================================
+   VIEW MODE
+========================================================= */
+
+function applyView() {
+
+    const view =
+        localStorage.getItem("finassist-view")
+        || "auto";
+
+
+    document.body.classList.remove(
+        "force-mobile",
+        "force-desktop"
+    );
+
+
+    if (view === "mobile") {
+        document.body.classList.add(
+            "force-mobile"
+        );
+    }
+
+
+    if (view === "desktop") {
+        document.body.classList.add(
+            "force-desktop"
+        );
+    }
+
+
+    const button =
+        document.getElementById("viewBtn");
+
+
+    if (button) {
+
+        button.title =
+            "Interface: " +
+            view.charAt(0).toUpperCase() +
+            view.slice(1) +
+            " (click to change)";
+
+    }
+
+}
+
+
+/* =========================================================
+   CHANGE VIEW
+========================================================= */
+
+function cycleView() {
+
+    const current =
+        localStorage.getItem("finassist-view")
+        || "auto";
+
+
+    const next =
+        current === "auto"
+            ? "mobile"
+            : current === "mobile"
+                ? "desktop"
+                : "auto";
+
+
+    localStorage.setItem(
+        "finassist-view",
+        next
+    );
+
+
+    applyView();
+
+}
+
+
+/* =========================================================
+   DARK MODE
+========================================================= */
+
+function applyTheme() {
+
+    const theme =
+        localStorage.getItem("finassist-theme")
+        || "light";
+
+
+    if (theme === "dark") {
+
+        document.body.classList.add("dark");
+
+    }
+
+    else {
+
+        document.body.classList.remove("dark");
+
+    }
+
+
+    const button =
+        document.getElementById("themeBtn");
+
+
+    if (button) {
+
+        button.textContent =
+            theme === "dark"
+                ? "☀"
+                : "☼";
+
+    }
+
+}
+
+
+/* =========================================================
+   TOGGLE DARK MODE
+========================================================= */
+
+function toggleDarkMode() {
+
+    const isDark =
+        document.body.classList.contains("dark");
+
+
+    localStorage.setItem(
+        "finassist-theme",
+        isDark ? "light" : "dark"
+    );
+
+
+    applyTheme();
+
+}
+
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
+function esc(value) {
+
+    return String(value).replace(
+        /[&<>"']/g,
+        function(character) {
+
+            return {
+                "&": "&amp;",
+                "<": "&lt;",
+                ">": "&gt;",
+                '"': "&quot;",
+                "'": "&#039;"
+            }[character];
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   ADD CHAT MESSAGE
+========================================================= */
+
+function add(role, text, html = false) {
+
+    welcome.style.display = "none";
+
+
+    const row =
+        document.createElement("div");
+
+
+    row.className =
+        "row " + role;
+
+
+    const avatar =
+        role === "assistant"
+            ? '<div class="avatar">F</div>'
+            : "";
+
+
+    const content =
+        html
+            ? text
+            : esc(text).replace(
+                /\n/g,
+                "<br>"
+            );
+
+
+    row.innerHTML =
+        avatar +
+        "<div>" +
+        '<div class="bubble">' +
+        content +
+        "</div>" +
+        '<div class="mini">' +
+        new Date().toLocaleTimeString(
+            [],
+            {
+                hour: "2-digit",
+                minute: "2-digit"
+            }
+        ) +
+        "</div>" +
+        "</div>";
+
+
+    chat.appendChild(row);
+
+
+    chat.scrollTop =
+        chat.scrollHeight;
+
+}
+
+
+/* =========================================================
+   SEND MESSAGE
+========================================================= */
+
+async function send(value) {
+
+    value =
+        (value || input.value).trim();
+
+
+    if (!value) {
+        return;
+    }
+
+
+    /* User message */
+
+    add(
+        "user",
+        value
+    );
+
+
+    input.value = "";
+    input.style.height = "auto";
+
+
+    /* Typing indicator */
+
+    const typing =
+        document.createElement("div");
+
+
+    typing.className =
+        "row assistant";
+
+
+    typing.id =
+        "typing";
+
+
+    typing.innerHTML =
+        '<div class="avatar">F</div>' +
+        '<div>' +
+        '<div class="bubble">' +
+        '<div class="typing">' +
+        "<i></i>" +
+        "<i></i>" +
+        "<i></i>" +
+        "</div>" +
+        "</div>" +
+        "</div>";
+
+
+    chat.appendChild(typing);
+
+
+    chat.scrollTop =
+        chat.scrollHeight;
+
+
+    /* Backend */
+
+    const result =
+        await askBackend(value);
+
+
+    typing.remove();
+
+
+    let answer =
+        result.answer ||
+        "I couldn't process that request.";
+
+
+    /* =====================================================
+       TRANSACTION DATA FROM BACKEND
+    ===================================================== */
+
+    if (
+        result.data &&
+        result.data.type === "transactions"
+    ) {
+
+        const rows =
+            result.data.rows
+                .map(function(row) {
+
+                    return `
+                        <tr>
+                            <td>${esc(row.transaction_id)}</td>
+                            <td>${esc(row.merchant)}</td>
+                            <td>${esc(row.category)}</td>
+                            <td>${esc(row.date)}</td>
+                            <td class="amt">
+                                ₹${Number(row.amount).toLocaleString("en-IN")}
+                            </td>
+                        </tr>
+                    `;
+
+                })
+                .join("");
+
+
+        answer += `
+            <div class="table">
+                <table>
+
+                    <tr>
+                        <th>Reference</th>
+                        <th>Merchant</th>
+                        <th>Category</th>
+                        <th>Date</th>
+                        <th>Amount</th>
+                    </tr>
+
+                    ${rows}
+
+                </table>
+            </div>
+        `;
+
+    }
+
+
+    /* =====================================================
+       CATEGORY DATA
+    ===================================================== */
+
+    if (
+        result.data &&
+        result.data.type === "category_summary"
+    ) {
+
+        const categories =
+            result.data.categories || [];
+
+
+        const rows =
+            categories
+                .map(function(category) {
+
+                    return `
+                        <tr>
+                            <td>${esc(category.category)}</td>
+                            <td class="amt">
+                                ₹${Number(category.total).toLocaleString("en-IN")}
+                            </td>
+                        </tr>
+                    `;
+
+                })
+                .join("");
+
+
+        answer += `
+            <div class="table">
+
+                <table>
+
+                    <tr>
+                        <th>Category</th>
+                        <th>Total Spending</th>
+                    </tr>
+
+                    ${rows}
+
+                </table>
+
+            </div>
+        `;
+
+    }
+
+
+    /* =====================================================
+       FINAL ASSISTANT MESSAGE
+    ===================================================== */
+
+    add(
+        "assistant",
+        answer,
+        true
+    );
+
+}
+
+
+/* =========================================================
+   ENTER TO SEND
+========================================================= */
+
+input.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (
+            event.key === "Enter" &&
+            !event.shiftKey
+        ) {
+
+            event.preventDefault();
+
+            send();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   AUTO RESIZE INPUT
+========================================================= */
+
+input.addEventListener(
+    "input",
+    function() {
+
+        input.style.height =
+            "auto";
+
+
+        input.style.height =
+            Math.min(
+                input.scrollHeight,
+                120
+            ) + "px";
+
+    }
+);
+
+
+/* =========================================================
+   RESET CHAT
+========================================================= */
+
+function resetChat() {
+
+    chat.innerHTML = "";
+
+    chat.appendChild(
+        welcome
+    );
+
+    welcome.style.display =
+        "block";
+
+    input.focus();
+
+
+    const sidebar =
+        document.getElementById(
+            "sidebar"
+        );
+
+
+    sidebar.classList.remove(
+        "open"
+    );
+
+}
+
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+applyView();
+
+applyTheme();
+
+</script>
+
+</body>
+</html>
